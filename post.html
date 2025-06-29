@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Post Details - SNow Insights</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+
+    header {
+      background-color: #283e4a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #283e4a;
+    }
+
+    p {
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 16px;
+      background-color: #283e4a;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .back-btn:hover {
+      background-color: #1d2e38;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SNow Insights</h1>
+    <p>Full Post View</p>
+  </header>
+
+  <div class="container">
+    <h2 id="postTitle">Loading...</h2>
+    <p id="postContent">Please wait...</p>
+    <a href="index.html" class="back-btn">← Back to All Posts</a>
+  </div>
+
+  <script>
+    const postData = JSON.parse(localStorage.getItem('postData'));
+    if (postData) {
+      document.getElementById('postTitle').textContent = postData.title;
+      document.getElementById('postContent').textContent = postData.content;
+    } else {
+      document.getElementById('postTitle').textContent = "Post Not Found";
+      document.getElementById('postContent').textContent = "No content was loaded. Please go back and try again.";
+    }
+  </script>
+</body>
+</html>
