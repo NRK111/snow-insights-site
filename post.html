@@ -1,79 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Post Details - SNow Insights</title>
+  <meta charset="UTF-8">
+  <title>SNow Insights - Post Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Fonts for clean look -->
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #283e4a;
+      --accent: #24a1e6;
+      --bg: #f9f9f9;
+      --card-bg: #fff;
+      --border: #e3e5e8;
+      --text: #222;
+      --meta: #6b7a86;
+      --radius: 12px;
+      --shadow: 0 2px 16px rgba(40,62,74,0.09);
+    }
     body {
-      font-family: Arial, sans-serif;
+      background: var(--bg);
+      font-family: 'Inter', Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f9f9f9;
+      color: var(--text);
+      min-height: 100vh;
     }
-
     header {
-      background-color: #283e4a;
-      color: white;
-      padding: 20px;
+      background: var(--primary);
+      color: #fff;
+      padding: 32px 0 24px 0;
       text-align: center;
     }
-
-    .container {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    header h1 {
+      margin: 0 0 8px 0;
+      font-weight: 600;
+      font-size: 2.2rem;
+      letter-spacing: 1px;
     }
-
-    h2 {
-      color: #283e4a;
+    header .subtext {
+      font-size: 1.05rem;
+      color: #c8d0d8;
+      margin-bottom: 10px;
     }
-
-    p {
-      line-height: 1.6;
-      color: #333;
+    nav.breadcrumbs {
+      margin: 16px 0 0 0;
+      font-size: 0.97rem;
+      color: #b6c4cf;
     }
-
-    .back-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 16px;
-      background-color: #283e4a;
-      color: white;
+    nav.breadcrumbs a {
+      color: #b6c4cf;
       text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
+      transition: color 0.2s;
     }
-
-    .back-btn:hover {
-      background-color: #1d2e38;
+    nav.breadcrumbs a:hover {
+      color: var(--accent);
+    }
+    .container {
+      max-width: 700px;
+      background: var(--card-bg);
+      margin: -48px auto 32px auto;
+      padding: 36px 28px 32px 28px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: relative;
+      z-index: 1;
+    }
+    .post-title {
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 0 0 10px 0;
+      color: var(--primary);
+    }
+    .meta {
+      color: var(--meta);
+      font-size: 0.98rem;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .meta .tag {
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.85rem;
+      padding: 3px 12px;
+      border-radius: 99px;
+      margin-right: 6px;
+      letter-spacing: 0.02em;
+    }
+    .meta .date {
+      font-style: italic;
+    }
+    .post-content {
+      font-size: 1.08rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+    .post-content h2, .post-content h3, .post-content h4 {
+      color: var(--primary);
+      margin-top: 1.4em;
+      margin-bottom: 0.6em;
+    }
+    .post-content pre {
+      background: #f4f6fa;
+      border: 1px solid #e3e5e8;
+      border-radius: 7px;
+      padding: 13px 16px;
+      font-size: 0.98rem;
+      overflow-x: auto;
+    }
+    .post-content code {
+      background: #eceff4;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 0.98em;
+    }
+    .post-content img {
+      max-width: 100%;
+      border-radius: 7px;
+      margin: 22px 0;
+      box-shadow: 0 2px 8px rgba(40,62,74,0.11);
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 36px;
+      font-size: 1rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.18s;
+    }
+    .back-link:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    @media (max-width: 800px) {
+      .container {
+        max-width: 98vw;
+        padding: 18px 4vw 18px 4vw;
+      }
+    }
+    @media (max-width: 500px) {
+      header {
+        padding: 20px 0 12px 0;
+      }
+      .container {
+        margin: -36px auto 16px auto;
+        padding: 12px 2vw 24px 2vw;
+      }
+      .post-title {
+        font-size: 1.3rem;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>SNow Insights</h1>
-    <p>Full Post View</p>
+    <div class="subtext">Your Guide to Real-Time ServiceNow Implementations</div>
+    <nav class="breadcrumbs">
+      <a href="../index.html">Home</a> &raquo; <span>Post</span>
+    </nav>
   </header>
-
   <div class="container">
-    <h2 id="postTitle">Loading...</h2>
-    <p id="postContent">Please wait...</p>
-    <a href="index.html" class="back-btn">← Back to All Posts</a>
+    <div class="post-title">ServiceNow ITSM Use Cases</div>
+    <div class="meta">
+      <span class="date">2024-06-15</span>
+      <span class="tag">ITSM</span>
+      <span>By <strong>Admin</strong></span>
+    </div>
+    <div class="post-content">
+      <p>
+        Explore real-world scenarios and solutions for IT Service Management implementation. This article breaks down common ITSM use cases and how ServiceNow enables streamlined, automated workflows across the organization.
+      </p>
+      <h2>Incident Management</h2>
+      <p>
+        ServiceNow automates incident intake, assignment, and resolution, reducing manual effort and improving response times.
+      </p>
+      <pre><code>var incident = new GlideRecord('incident');
+incident.initialize();
+incident.short_description = 'Printer not working';
+incident.insert();</code></pre>
+      <h3>Problem & Change Management</h3>
+      <p>
+        Link incidents to problems and manage changes with approval flows for better risk mitigation.
+      </p>
+      <img src="../assets/itsm-workflow.png" alt="ITSM Workflow Example" />
+      <h4>Key Benefits</h4>
+      <ul>
+        <li>Faster resolution</li>
+        <li>Audit trails for compliance</li>
+        <li>Unified self-service portal</li>
+      </ul>
+    </div>
+    <a href="../index.html" class="back-link">&#8592; Back to Home</a>
   </div>
-
-  <script>
-    const postData = JSON.parse(localStorage.getItem('postData'));
-    if (postData) {
-      document.getElementById('postTitle').textContent = postData.title;
-      document.getElementById('postContent').textContent = postData.content;
-    } else {
-      document.getElementById('postTitle').textContent = "Post Not Found";
-      document.getElementById('postContent').textContent = "No content was loaded. Please go back and try again.";
-    }
-  </script>
 </body>
 </html>
