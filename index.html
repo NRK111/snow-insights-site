@@ -1,175 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>SNow Insights</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #283e4a;
+      --accent: #24a1e6;
+      --bg: #f9f9f9;
+      --card-bg: #fff;
+      --border: #e3e5e8;
+      --text: #222;
+      --meta: #6b7a86;
+      --radius: 12px;
+      --shadow: 0 2px 16px rgba(40,62,74,0.09);
+    }
     body {
-      font-family: Arial, sans-serif;
+      background: var(--bg);
+      font-family: 'Inter', Arial, sans-serif;
       margin: 0;
       padding: 0;
+      color: var(--text);
+      min-height: 100vh;
     }
-
     header {
-      background-color: #283e4a;
-      color: white;
-      padding: 20px;
+      background: var(--primary);
+      color: #fff;
+      padding: 38px 0 28px 0;
       text-align: center;
+      box-shadow: 0 2px 8px rgba(40,62,74,0.09);
     }
-
-    .subtext {
-      font-size: 14px;
-      color: #ccc;
+    header h1 {
+      margin: 0 0 8px 0;
+      font-weight: 600;
+      font-size: 2.25rem;
+      letter-spacing: 1px;
     }
-
+    header .subtext {
+      font-size: 1.05rem;
+      color: #c8d0d8;
+      margin-bottom: 16px;
+    }
     .search-bar {
-      margin-top: 10px;
-      padding: 8px;
-      width: 60%;
+      margin-top: 14px;
+      padding: 9px 14px;
+      width: 70%;
       max-width: 400px;
-      border-radius: 5px;
+      border-radius: 6px;
       border: none;
+      font-size: 1rem;
+      box-shadow: 0 1px 4px rgba(40,62,74,0.04);
+      outline: none;
     }
-
-    main {
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 38px 16px 0 16px;
       display: flex;
-      padding: 20px;
+      gap: 32px;
     }
-
     .filters {
-      width: 250px;
-      padding-right: 20px;
-      border-right: 1px solid #ccc;
+      width: 260px;
+      min-width: 180px;
+      max-width: 320px;
+      padding-right: 18px;
+      border-right: 1px solid #e4e8eb;
+      box-sizing: border-box;
     }
-
+    .filters h3 {
+      margin-top: 0;
+    }
     .cards {
       flex: 1;
-      padding-left: 20px;
+      padding-left: 18px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 28px;
+      align-items: stretch;
     }
-
     .card {
-      border: 1px solid #ccc;
-      padding: 15px;
-      border-radius: 8px;
-      background-color: #f9f9f9;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px 20px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s, transform 0.18s;
       cursor: pointer;
-      transition: transform 0.2s;
+      position: relative;
     }
-
     .card:hover {
-      transform: scale(1.02);
+      box-shadow: 0 4px 24px rgba(40,62,74,0.13);
+      transform: translateY(-2px) scale(1.018);
     }
-
     .card h4 {
-      margin: 0 0 10px;
+      margin: 0 0 11px 0;
+      font-size: 1.18rem;
+      font-weight: 600;
+      color: var(--primary);
+      word-break: break-word;
     }
-
+    .card p {
+      margin: 0 0 15px 0;
+      color: var(--text);
+      font-size: 1.01rem;
+      flex: 1;
+    }
     .meta {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #666;
+      font-size: 0.96rem;
+      color: var(--meta);
+      margin-top: auto;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
     }
-
     .tag {
-      background-color: #e0e0e0;
-      padding: 3px 8px;
-      border-radius: 4px;
-      margin-right: 5px;
-      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.85rem;
+      padding: 3px 12px;
+      border-radius: 99px;
+      margin-right: 4px;
+      letter-spacing: 0.02em;
+    }
+    @media (max-width: 900px) {
+      .main-content {
+        flex-direction: column;
+        gap: 18px;
+        padding-top: 18px;
+      }
+      .filters {
+        width: auto;
+        max-width: 100vw;
+        border-right: none;
+        padding-right: 0;
+        margin-bottom: 18px;
+      }
+      .cards {
+        padding-left: 0;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      }
+    }
+    @media (max-width: 600px) {
+      header {
+        padding: 18px 0 8px 0;
+      }
+      header h1 {
+        font-size: 1.22rem;
+      }
+      .main-content {
+        padding: 5px 2vw 0 2vw;
+      }
+      .card {
+        padding: 14px 8px 14px 10px;
+        border-radius: 8px;
+      }
+      .card h4 {
+        font-size: 1.01rem;
+      }
     }
   </style>
+  <script>
+    // Simple filter by tag (works if you use data-tag attribute on cards)
+    function filterByLabel(select) {
+      var label = select.value;
+      var cards = document.querySelectorAll('.card');
+      cards.forEach(function(card) {
+        if (!label || card.getAttribute('data-tag') === label) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+    function searchPosts(input) {
+      var q = input.value.toLowerCase();
+      var cards = document.querySelectorAll('.card');
+      cards.forEach(function(card) {
+        var text = card.innerText.toLowerCase();
+        card.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
+  </script>
 </head>
 <body>
   <header>
     <h1>SNow Insights</h1>
-    <p>Your Guide to Real-Time ServiceNow Implementations</p>
-    <p class="subtext">Explore use cases, project experiences, documentation, and solutions—all in one place.</p>
-    <input type="text" placeholder="Search" class="search-bar" id="search" />
+    <div class="subtext">Your Guide to Real-Time ServiceNow Implementations</div>
+    <input class="search-bar" type="text" placeholder="Search posts..." oninput="searchPosts(this)" />
   </header>
-
-  <main>
+  <div class="main-content">
     <aside class="filters">
-      <h3>Filter</h3>
-      <label><strong>Module</strong></label><br />
-      <select id="moduleFilter">
-        <option value="All">All</option>
-        <option value="ITSM" selected>ITSM</option>
-        <option value="Integrations">Integrations</option>
+      <h3>Filter by Module</h3>
+      <select id="labelFilter" onchange="filterByLabel(this)" style="margin-bottom:18px; padding:6px 12px; border-radius:5px;">
+        <option value="">All</option>
+        <option value="ITSM">ITSM</option>
         <option value="HRSD">HRSD</option>
-        <option value="ITOM">ITOM</option>
+        <option value="Integration">Integration</option>
+        <option value="CMDB">CMDB</option>
       </select>
+      <div style="font-size:0.96rem; color:var(--meta);margin-top:30px;">
+        <strong>Tip:</strong> Use the search above to quickly find posts by topic, tag, or description.
+      </div>
     </aside>
-
     <section class="cards" id="cardContainer">
-      <!-- Sample Cards -->
-      <div class="card" data-title="Incident SLA Automation" data-content="Steps to automate SLAs for incidents based on assignment groups and priorities.">
-        <h4>Incident SLA Automation</h4>
-        <p>How to automate SLAs for incidents.</p>
+      <!-- Example posts; add more as needed -->
+      <a class="card" href="posts/itsm-usecases.html" data-tag="ITSM">
+        <h4>ServiceNow ITSM Use Cases</h4>
+        <p>Explore real-world scenarios and solutions for IT Service Management implementation.</p>
         <div class="meta">
-          <span>Mar 25, 2024</span>
+          <span>2024-06-15</span>
           <span class="tag">ITSM</span>
         </div>
-      </div>
-
-      <div class="card" data-title="Inbound Email Approvals" data-content="Handle email approval workflows using inbound actions.">
-        <h4>Inbound Email Approvals</h4>
-        <p>Process approvals using emails.</p>
+      </a>
+      <a class="card" href="posts/hrsd-onboarding.html" data-tag="HRSD">
+        <h4>ServiceNow HRSD Onboarding Experience</h4>
+        <p>Discover how to automate HR onboarding with ServiceNow's HR Service Delivery module.</p>
         <div class="meta">
-          <span>Mar 20, 2024</span>
-          <span class="tag">ITSM</span>
-        </div>
-      </div>
-
-      <div class="card" data-title="HR Case via Portal" data-content="Create HR cases from the portal using catalog items and workflows.">
-        <h4>HR Case via Portal</h4>
-        <p>Submit HR cases via portal.</p>
-        <div class="meta">
-          <span>Mar 10, 2024</span>
+          <span>2024-06-10</span>
           <span class="tag">HRSD</span>
         </div>
-      </div>
+      </a>
+      <a class="card" href="posts/servicenow-integrations.html" data-tag="Integration">
+        <h4>Integrating ServiceNow with External Applications</h4>
+        <p>Methods, best practices, and common pitfalls for ServiceNow REST and SOAP integrations.</p>
+        <div class="meta">
+          <span>2024-05-30</span>
+          <span class="tag">Integration</span>
+        </div>
+      </a>
+      <a class="card" href="posts/cmdb-best-practices.html" data-tag="CMDB">
+        <h4>CMDB Best Practices</h4>
+        <p>How to structure your CMDB for accuracy, maintainability, and maximum value in ServiceNow.</p>
+        <div class="meta">
+          <span>2024-05-20</span>
+          <span class="tag">CMDB</span>
+        </div>
+      </a>
+      <!-- Add more cards here -->
     </section>
-  </main>
-
-  <script>
-    function filterCards() {
-      const selectedModule = document.getElementById('moduleFilter').value.toLowerCase();
-      const query = document.getElementById('search').value.toLowerCase();
-      const cards = document.querySelectorAll('.card');
-
-      cards.forEach(card => {
-        const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase());
-        const title = card.querySelector('h4').textContent.toLowerCase();
-        const content = card.dataset.content.toLowerCase();
-
-        const matchModule = selectedModule === 'all' || tags.includes(selectedModule);
-        const matchSearch = title.includes(query) || content.includes(query);
-
-        card.style.display = matchModule && matchSearch ? 'block' : 'none';
-      });
-    }
-
-    document.getElementById('moduleFilter').addEventListener('change', filterCards);
-    document.getElementById('search').addEventListener('input', filterCards);
-
-    // Redirect on click
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('click', () => {
-        const postData = {
-          title: card.dataset.title,
-          content: card.dataset.content
-        };
-        localStorage.setItem('postData', JSON.stringify(postData));
-        window.location.href = 'post.html';
-      });
-    });
-
-    window.addEventListener('DOMContentLoaded', filterCards);
-  </script>
+  </div>
 </body>
 </html>
